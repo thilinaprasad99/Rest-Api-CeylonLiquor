@@ -14,13 +14,12 @@ routes.get("/arracks/getArracks", (req, res) => {
 });
 
 routes.patch("/arracks/updateArracks", (req, res) => {
-  // console.log(req.body);
   updateArracks(req.body, (result) => {
     res.status(result.statusCode).send(result.body);
   });
 });
-routes.delete("/arracks/deleteArracks", (req, res) => {
-  deleteArracks(req.body, (result) => {
+routes.delete("/arracks/deleteArracks/:id", (req, res) => {
+  deleteArracks(req.params, (result) => {
     res.status(result.statusCode).send(result.body);
   });
 });

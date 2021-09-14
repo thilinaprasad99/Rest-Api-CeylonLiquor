@@ -63,17 +63,16 @@ module.exports = {
 
   deleteArracks: async (info, callback) => {
     try {
-      const arracksUpdate = await models.Arracks.destroy(
+      const data = await models.Arracks.destroy(
         {
           where: {id: info.id}
         }
       );
       callback({
         statusCode: Constants.errorStatus.SUCCESS,
-        body: arracksUpdate,
+        body: {},
       });
     } catch (error) {
-      console.log(error);
       callback({
         statusCode: Constants.errorStatus.SERVER_ERROR,
         body: error,
