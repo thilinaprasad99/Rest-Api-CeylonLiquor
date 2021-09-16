@@ -2,12 +2,12 @@ const models = require("../../models");
 const Constants = require("../lib/Constants");
 
 module.exports = {
-  createCategory: async (info, callback) => {
+  createBeers: async (info, callback) => {
     try {
-      const createdCategory = await models.Categorys.create(info);
+      const createdBeer = await models.Beers.create(info);
       callback({
         statusCode: Constants.errorStatus.SUCCESS,
-        body: createdCategory,
+        body: createdBeer,
       });
     } catch (error) {
       callback({
@@ -17,12 +17,12 @@ module.exports = {
     }
   },
 
-  getCategory: async (info, callback) => {
+  getBeer: async (info, callback) => {
     try {
-      const Category = await models.Categorys.findAll({});
+      const Beer = await models.Beers.findAll({});
       callback({
         statusCode: Constants.errorStatus.SUCCESS,
-        body: Category,
+        body: Beer,
       });
     } catch (error) {
       callback({
@@ -32,22 +32,35 @@ module.exports = {
     }
   },
 
-  updateCategory: async (info, callback) => {
+  updateBeer: async (info, callback) => {
     try {
-      const CategoryUpdate = await models.Categorys.update(
+      const BeerUpdate = await models.Beers.update(
         {
           ename: info.ename,
           sname: info.sname,
-          screen: info.screen,
+          description: info.description,
+          price_120: info.price_120,
+          price_180: info.price_180,
+          price_190: info.price_190,
+          price_220: info.price_220,
+          price_240: info.price_240,
+          price_300: info.price_300,
+          price_330: info.price_330,
+          price_340: info.price_340,
+          price_350: info.price_350,
+          price_370: info.price_370,
+          price_400: info.price_400,
+          price_500: info.price_500,
+          price_600: info.price_600,
           image: info.image,
         },
         {
-          where: {id: info.id}
+          where: { id: info.id },
         }
       );
       callback({
         statusCode: Constants.errorStatus.SUCCESS,
-        body: CategoryUpdate,
+        body: BeerUpdate,
       });
     } catch (error) {
       console.log(error);
@@ -58,9 +71,9 @@ module.exports = {
     }
   },
 
-  deleteCategory: async (info, callback) => {
+  deleteBeer: async (info, callback) => {
     try {
-      const data = await models.Categorys.destroy(
+      const data = await models.Beers.destroy(
         {
           where: {id: info.id}
         }

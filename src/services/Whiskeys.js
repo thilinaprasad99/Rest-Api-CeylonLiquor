@@ -2,12 +2,12 @@ const models = require("../../models");
 const Constants = require("../lib/Constants");
 
 module.exports = {
-  createCategory: async (info, callback) => {
+  createWhiskeys: async (info, callback) => {
     try {
-      const createdCategory = await models.Categorys.create(info);
+      const createdWhiskey = await models.Whiskey.create(info);
       callback({
         statusCode: Constants.errorStatus.SUCCESS,
-        body: createdCategory,
+        body: createdWhiskey,
       });
     } catch (error) {
       callback({
@@ -17,12 +17,12 @@ module.exports = {
     }
   },
 
-  getCategory: async (info, callback) => {
+  getWhiskey: async (info, callback) => {
     try {
-      const Category = await models.Categorys.findAll({});
+      const Whiskey = await models.Whiskey.findAll({});
       callback({
         statusCode: Constants.errorStatus.SUCCESS,
-        body: Category,
+        body: Whiskey,
       });
     } catch (error) {
       callback({
@@ -32,22 +32,27 @@ module.exports = {
     }
   },
 
-  updateCategory: async (info, callback) => {
+  updateWhiskey: async (info, callback) => {
     try {
-      const CategoryUpdate = await models.Categorys.update(
+      const updateWhiskey = await models.Whiskey.update(
         {
           ename: info.ename,
           sname: info.sname,
-          screen: info.screen,
+          description: info.description,
+          price_375: info.price_375,
+          price_650: info.price_650,
+          price_700: info.price_700,
+          price_750: info.price_750,
+          price_1000: info.price_1000,
           image: info.image,
         },
         {
-          where: {id: info.id}
+          where: { id: info.id },
         }
       );
       callback({
         statusCode: Constants.errorStatus.SUCCESS,
-        body: CategoryUpdate,
+        body: updateWhiskey,
       });
     } catch (error) {
       console.log(error);
@@ -58,9 +63,9 @@ module.exports = {
     }
   },
 
-  deleteCategory: async (info, callback) => {
+  deleteWhiskey: async (info, callback) => {
     try {
-      const data = await models.Categorys.destroy(
+      const data = await models.Whiskey.destroy(
         {
           where: {id: info.id}
         }

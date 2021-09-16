@@ -2,12 +2,12 @@ const models = require("../../models");
 const Constants = require("../lib/Constants");
 
 module.exports = {
-  createCategory: async (info, callback) => {
+  createRum: async (info, callback) => {
     try {
-      const createdCategory = await models.Categorys.create(info);
+      const createdRum = await models.Rums.create(info);
       callback({
         statusCode: Constants.errorStatus.SUCCESS,
-        body: createdCategory,
+        body: createdRum,
       });
     } catch (error) {
       callback({
@@ -17,12 +17,12 @@ module.exports = {
     }
   },
 
-  getCategory: async (info, callback) => {
+  getRum: async (info, callback) => {
     try {
-      const Category = await models.Categorys.findAll({});
+      const Rum = await models.Rums.findAll({});
       callback({
         statusCode: Constants.errorStatus.SUCCESS,
-        body: Category,
+        body: Rum,
       });
     } catch (error) {
       callback({
@@ -32,22 +32,25 @@ module.exports = {
     }
   },
 
-  updateCategory: async (info, callback) => {
+  updateRum: async (info, callback) => {
     try {
-      const CategoryUpdate = await models.Categorys.update(
+      const updateRum = await models.Rums.update(
         {
           ename: info.ename,
           sname: info.sname,
-          screen: info.screen,
+          description: info.description,
+          price_375: info.price_375,
+          price_750: info.price_750,
+          price_1000: info.price_1000,
           image: info.image,
         },
         {
-          where: {id: info.id}
+          where: { id: info.id },
         }
       );
       callback({
         statusCode: Constants.errorStatus.SUCCESS,
-        body: CategoryUpdate,
+        body: updateRum,
       });
     } catch (error) {
       console.log(error);
@@ -58,9 +61,9 @@ module.exports = {
     }
   },
 
-  deleteCategory: async (info, callback) => {
+  deleteRum: async (info, callback) => {
     try {
-      const data = await models.Categorys.destroy(
+      const data = await models.Rums.destroy(
         {
           where: {id: info.id}
         }
